@@ -19,8 +19,13 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'middlename',
+        'lastname',
+        'tel',
+        'login',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -44,5 +49,20 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function cars()
+    {
+        return $this->hasMany(Car::class);
+    }
+
+    public function repairRequests()
+    {
+        return $this->hasMany(RepairRequest::class);
+    }
+    
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
     }
 }
