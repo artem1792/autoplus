@@ -4,39 +4,61 @@
             Добавление автомобиля
         </h2>
     </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    @if(session('error'))
-                        <div class="mb-4 p-4 bg-red-100 text-red-700 rounded">{{ session('error') }}</div>
-                    @endif
-
-                    <form method="POST" action="{{ route('cars.store') }}">
-                        @csrf
-
-                        <div class="mb-4">
-                            <label class="block font-medium text-sm text-gray-700" for="brand">Марка</label>
-                            <input id="brand" name="brand" type="text" class="border-gray-300 focus:border-sky-500 rounded-md shadow-sm mt-1 block w-full" value="{{ old('brand') }}" required>
+    <div class="py-8 md:py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-white shadow rounded-lg overflow-hidden">
+                    <div class="p-6 sm:p-8">
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900">Новый автомобиль</h3>
+                            <p class="text-sm text-gray-500 mt-1">
+                                Заполните данные вашего автомобиля
+                            </p>
                         </div>
-
-                        <div class="mb-4">
-                            <label class="block font-medium text-sm text-gray-700" for="model">Модель</label>
-                            <input id="model" name="model" type="text" class="border-gray-300 focus:border-sky-500 rounded-md shadow-sm mt-1 block w-full" value="{{ old('model') }}" required>
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="block font-medium text-sm text-gray-700" for="reg_number">Регистрационный номер</label>
-                            <input id="reg_number" name="reg_number" type="text" class="border-gray-300 focus:border-sky-500 rounded-md shadow-sm mt-1 block w-full" value="{{ old('reg_number') }}" required>
-                        </div>
-
-                        <div class="flex items-center justify-end mt-4">
-                            <button type="submit" class="bg-sky-500 text-white px-4 py-2 rounded hover:bg-sky-600">
-                                Создать карточку
-                            </button>
-                        </div>
-                    </form>
+                        <form method="POST" action="{{ route('cars.store') }}" class="space-y-5">
+                            @csrf
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1.5" for="brand">
+                                    Марка
+                                    <span class="text-red-500">*</span>
+                                </label>
+                                <input id="brand" name="brand" type="text"
+                                       class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-teal-500 focus:ring-2 focus:ring-teal-500 placeholder-gray-400"
+                                       value="{{ old('brand') }}" required>
+                                <x-input-error :messages="$errors->get('brand')" class="mt-1.5" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1.5" for="model">
+                                    Модель
+                                    <span class="text-red-500">*</span>
+                                </label>
+                                <input id="model" name="model" type="text"
+                                       class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-teal-500 focus:ring-2 focus:ring-teal-500 placeholder-gray-400"
+                                       value="{{ old('model') }}" required>
+                                <x-input-error :messages="$errors->get('model')" class="mt-1.5" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1.5" for="reg_number">
+                                    Регистрационный номер
+                                    <span class="text-red-500">*</span>
+                                </label>
+                                <input id="reg_number" name="reg_number" type="text"
+                                       class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-teal-500 focus:ring-2 focus:ring-teal-500 placeholder-gray-400"
+                                       value="{{ old('reg_number') }}" required>
+                                <x-input-error :messages="$errors->get('reg_number')" class="mt-1.5" />
+                            </div>
+                            <div class="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 pt-4 border-t border-gray-100">
+                                <a href="{{ route('requests.index') }}"
+                                   class="inline-flex justify-center items-center px-4 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg transition-all duration-200 hover:bg-gray-50 hover:border-gray-400 active:scale-95">
+                                    Отмена
+                                </a>
+                                <button type="submit"
+                                        class="inline-flex justify-center items-center px-5 py-2.5 text-sm font-medium text-white bg-teal-500 rounded-lg transition-all duration-200 hover:bg-teal-600 hover:shadow-md active:scale-95 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:ring-offset-2">
+                                    Создать карточку
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
